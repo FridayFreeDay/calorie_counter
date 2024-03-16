@@ -16,10 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from rest_framework import routers
 
-from food.views import WomenAPIView
+from food.views import WomenAPIView, FoodAPIView
+router = routers.SimpleRouter()
+router.register(r'food', FoodAPIView, basename='food')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('women/', WomenAPIView.as_view())
 ]
+
+urlpatterns += router.urls
